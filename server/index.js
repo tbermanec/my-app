@@ -1,5 +1,16 @@
 const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+
+// Set up express
 const app = express();
+
+// Log requests to the console.
+app.use(logger('dev'));
+
+// Parse incoming requests data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 require('dotenv').config();
 
@@ -25,18 +36,6 @@ require('./routes')(app);
 app.get('*', (req, res) =>
     res.status(200).send('Server is up')
 );
-
-
-
-// Find all users
-//app.get('/users', (req, res) => { 
-  //  User.findAll().then(users => {
-  //      console.log("All users:", JSON.stringify(users, null, 4));
-  //    });
- //})
-
- 
-
 
 //Server port
 const port = 3000;
