@@ -1,4 +1,4 @@
-const usersController = require('../controllers/users');
+const usersController = require('../controllers').users;
 
 module.exports = app => {
     app.get('/api', (req, res) =>
@@ -6,7 +6,8 @@ module.exports = app => {
         message: 'Welcome to the API'
       })
     );
-  
+    
+    app.post('/api/users', usersController.create);
     app.get('/api/users', usersController.list);
   
   };

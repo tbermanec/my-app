@@ -1,11 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define('User', {
     id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.UUIDV1,
+      defaultValue: DataTypes.UUIDV1,
+      primaryKey: true,
     },
     username: {
       type: DataTypes.TEXT
+    },
+    city: {
+      type: DataTypes.TEXT
     }
+  }, {
+    timestamps: false
   });
   return User;
 };
