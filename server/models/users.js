@@ -5,11 +5,24 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true,
     },
-    username: {
+    auth_id: {
       type: DataTypes.TEXT
     },
+    username: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    email: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     city: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     timestamps: false

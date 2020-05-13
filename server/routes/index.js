@@ -7,7 +7,7 @@ module.exports = app => {
       })
     );
     
-    app.post('/api/users', usersController.create);
+    app.post('/api/users', usersController.createUser);
     app.get('/api/users', usersController.list);
   
   };
