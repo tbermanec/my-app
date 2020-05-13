@@ -21,7 +21,7 @@ const Sequelize = require('sequelize');
 
 // Controllers
 const userCtrl = require('./controllers/userCtrl');
-
+const carCtrl = require('./controllers/carCtrl');
 
 const app = express();
 
@@ -136,6 +136,12 @@ app.post('/api/user/add', userCtrl.createUser);
 
 // GET ALL USERS
 app.get('/api/users', userCtrl.getUsers);
+
+
+// CARS ENDPOINTS
+
+// GET ALL CARS
+app.get('/api/cars', carCtrl.getCars);
 
 
 const path = require('path')

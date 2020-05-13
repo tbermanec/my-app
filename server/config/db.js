@@ -30,6 +30,6 @@ db.sequelize = sequelize;
 
 // Models/tables
 db.users = require('../models/users')(sequelize, Sequelize);
-
+db.cars = require('../models/cars')(sequelize, Sequelize);
 
 module.exports = db;

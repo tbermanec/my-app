@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     const Car = sequelize.define('Car', {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         primaryKey: true,
-        autoIncrement: true
       },
       name: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: false
       },
       manufacturer: {
         type: DataTypes.TEXT,
@@ -19,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       owner_id: {
         type: DataTypes.INTEGER,
-        allowNull: true  
+        allowNull: false  
       },
     }, {
       timestamps: false
