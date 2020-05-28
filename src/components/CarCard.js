@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import { Avatar, CardMedia } from '@material-ui/core';
 
 const CarCard = (props) => {
-  //const { avatarUrl, title, subtitle, description, imageUrl } = props;
   const { avatarUrl, name, shortInfo, description, imageUrl } = props;
   return (
     <Card>
