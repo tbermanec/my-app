@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const { json } = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -52,7 +52,7 @@ sequelize
 app.use(express.static(`${__dirname}/../build`));
 
 // Middlewares
-app.use(json());
+app.use(bodyParser.json());
 app.use(
   session({
     secret: process.env.SECRET,
@@ -132,10 +132,19 @@ app.post('/api/user/add', userCtrl.createUser);
 // GET ALL USERS
 app.get('/api/users', userCtrl.getUsers);
 
+// GET ALL USER CARS
+app.get('/api/:id/cars', userCtrl.getUserCars);
+
 // CARS ENDPOINTS
 
 // GET ALL CARS
 app.get('/api/cars', carCtrl.getCars);
+
+// GET CAR BY ID
+app.get('/api/cars/:id', carCtrl.getCarById);
+
+// CREATE CAR
+app.post('/api/cars', carCtrl.createCar);
 
 const path = require('path');
 // app.get('*', (req, res)=>{

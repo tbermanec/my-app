@@ -3,14 +3,18 @@ module.exports = (sequelize, DataTypes) => {
     'Car',
     {
       id: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: DataTypes.TEXT,
-        allowNull: false,
       },
       manufacturer: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      year: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -26,13 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      year: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
       owner_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

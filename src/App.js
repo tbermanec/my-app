@@ -5,9 +5,7 @@ import { Grid } from '@material-ui/core/';
 import Link from '@material-ui/core/Link';
 import Header from './components/Header';
 import router from './router';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import CarsList from './components/CarsList';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
@@ -15,11 +13,6 @@ function App() {
       <Grid container direction="column">
         <Grid item>
           <Header />
-        </Grid>
-        <Grid>
-          <Grid item>
-            <Typography variant="h4">Available Cars</Typography>
-          </Grid>
         </Grid>
 
         <Grid item container>
