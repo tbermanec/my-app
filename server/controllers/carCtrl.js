@@ -38,16 +38,31 @@ module.exports = {
   },
 
   updateCar: (req, res) => {
-    const id = req.params.id;
+    let carId = req.params.id;
+
     const { name, manufacturer, year, imageUrl, description } = req.body;
 
-    db.Car.update(id, name, manufacturer, year, imageUrl, description).then(
-      (response) => {
-        res
-          .status(200)
-          .json(response)
-          .catch(console.log('Error in update Product!'));
-      }
-    );
+    db.cars
+      .update(
+        {
+          name,
+          manufacturer,
+          year,
+          imageUrl,
+          description,
+        },
+        { where: { id: carId } }
+      )
+      .then(function (rowsUpdated) {
+        res.json(rowsUpdated);
+      });
+  },
+
+  deleteCar: (req, res) => {
+    let carId = req.params.id;
+
+    db.cars.destroy({ where: { id: carId } }).then(() => {
+      res.sendStatus(200);
+    });
   },
 };

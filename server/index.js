@@ -146,6 +146,12 @@ app.get('/api/cars/:id', carCtrl.getCarById);
 // CREATE CAR
 app.post('/api/cars', carCtrl.createCar);
 
+// EDIT CAR
+app.put('/api/cars/:id', carCtrl.updateCar);
+
+// DELETE CAR
+app.delete('/api/cars/:id', carCtrl.deleteCar);
+
 const path = require('path');
 // app.get('*', (req, res)=>{
 //   res.sendFile(path.join(__dirname, '../build/index.html'));
