@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core/';
@@ -6,27 +6,46 @@ import Link from '@material-ui/core/Link';
 import Header from './components/Header';
 import router from './router';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { useAuth0 } from './utils/react-auth0-spa';
 
-function App() {
-  return (
-    <Router>
-      <Grid container direction="column">
-        <Grid item>
-          <Header />
-        </Grid>
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-        <Grid item container>
-          <Grid item xs={false} sm={2} />
-          <Grid item xs={12} sm={8}>
-            {router}
+    this.state = {
+      id: null,
+      auth_id: null,
+    };
+  }
 
-            <Copyright />
+  componentDidMount() {
+    const { loading } = useAuth0;
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  }
+
+  render() {
+    return (
+      <Router>
+        <Grid container direction="column">
+          <Grid item>
+            <Header user={this.state.auth_id} />
           </Grid>
-          <Grid item xs={false} sm={2} />
+
+          <Grid item container>
+            <Grid item xs={false} sm={2} />
+            <Grid item xs={12} sm={8}>
+              {router}
+
+              <Copyright />
+            </Grid>
+            <Grid item xs={false} sm={2} />
+          </Grid>
         </Grid>
-      </Grid>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 function Copyright() {

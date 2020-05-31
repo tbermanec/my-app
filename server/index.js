@@ -74,7 +74,7 @@ passport.use(
       domain: AUTH_DOMAIN,
       clientID: AUTH_CLIENT_ID,
       clientSecret: AUTH_CLIENT_SECRET,
-      callbackURL: 'login',
+      callbackURL: '/login',
     },
     function (accessToken, refreshToken, extraParams, profile, done) {
       getUserByAuthId(profile._json.user_id).then((res) => {
@@ -115,16 +115,16 @@ app.get(
 app.get('/logout', userCtrl.logout);
 
 // GET USER PASSPORT INFO
-app.get('/me', userCtrl.getUserPassportInfo);
+app.get('http://localhost:3001/me', userCtrl.getUserPassportInfo);
 
 // GET SESSION OBJECT
 app.get('/api/logstatus', userCtrl.getLogStatus);
 
 // GET USER INFO FROM DB
-app.get('/api/user', userCtrl.getUser);
+app.get('http://localhost:3001/api/user', userCtrl.getUser);
 
 // GET USER INFO
-// app.get('/api/user/:id', userCtrl.getUserById)
+app.get('/api/user/:id', userCtrl.getUserById);
 
 // CREATE USER
 app.post('/api/user/add', userCtrl.createUser);
@@ -152,7 +152,7 @@ app.put('/api/cars/:id', carCtrl.updateCar);
 // DELETE CAR
 app.delete('/api/cars/:id', carCtrl.deleteCar);
 
-const path = require('path');
+// const path = require('path');
 // app.get('*', (req, res)=>{
 //   res.sendFile(path.join(__dirname, '../build/index.html'));
 // })
