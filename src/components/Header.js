@@ -35,12 +35,13 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Typography
-            varaiant="title"
+            variant="overline"
             color="inherit"
             className={classes.typographyStyles}
           >
-            My <DirectionsCarRoundedIcon />
-            App
+            My_
+            <DirectionsCarRoundedIcon />
+            _App
           </Typography>
           {!isAuthenticated && (
             <button onClick={() => loginWithRedirect({})}>Log in</button>

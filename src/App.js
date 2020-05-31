@@ -5,8 +5,9 @@ import { Grid } from '@material-ui/core/';
 import Link from '@material-ui/core/Link';
 import Header from './components/Header';
 import router from './router';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { useAuth0 } from './utils/react-auth0-spa';
+import history from './utils/history';
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Grid container direction="column">
           <Grid item>
             <Header user={this.state.auth_id} />
