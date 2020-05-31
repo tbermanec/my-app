@@ -8,11 +8,12 @@ import Car from './components/Car';
 import UserCars from './components/UserCars';
 import UpdateCar from './components/UpdateCar';
 import Profile from './components/Profile';
+import PrivateRoute from './components/PrivateRoute';
 
 export default (
   <Switch>
     <Route path="/" exact />
-    <Route path="/profile" component={Profile} />
+    <PrivateRoute path="/profile" component={Profile} />
     <Route path="/cars" component={CarsList} />
     <Route path="/create-car" component={CreateCar} />
     <Route path="/formik" component={CarForm} />
