@@ -2,6 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 require('dotenv').config();
 
 // Import DB methods
@@ -10,7 +12,12 @@ const { getUserByAuthId, createUserByAuthId } = require('./dbMethods');
 // Passport & Auth0
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-const { AUTH_DOMAIN, AUTH_CLIENT_ID, AUTH_CLIENT_SECRET } = process.env;
+const {
+  AUTH_DOMAIN,
+  AUTH_CLIENT_ID,
+  AUTH_CLIENT_SECRET,
+  YOUR_API_IDENTIFIER,
+} = process.env;
 
 // Sequelize.js
 const Sequelize = require('sequelize');
@@ -97,6 +104,34 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (obj, done) {
   done(null, obj);
+});
+
+// Set up Auth0 configuration
+const authConfig = {
+  domain: 'dev-s-yisldm.eu.auth0.com',
+  audience: YOUR_API_IDENTIFIER,
+};
+
+// Define middleware that validates incoming bearer tokens
+// using JWKS from dev-s-yisldm.eu.auth0.com
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
+  }),
+
+  audience: authConfig.audience,
+  issuer: `https://${authConfig.domain}/`,
+  algorithm: ['RS256'],
+});
+
+// Define an endpoint that must be called with an access token
+app.get('/api/external', checkJwt, (req, res) => {
+  res.send({
+    msg: 'Your Access Token was successfully validated!',
+  });
 });
 
 // AUTH endpoints

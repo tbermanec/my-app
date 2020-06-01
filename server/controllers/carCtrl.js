@@ -2,7 +2,14 @@ const db = require('../config/db');
 
 module.exports = {
   createCar: (req, res, next) => {
-    const { name, manufacturer, year, imageUrl, description } = req.body;
+    const {
+      name,
+      manufacturer,
+      year,
+      imageUrl,
+      description,
+      short_info,
+    } = req.body;
 
     db.cars
       .create({
@@ -11,6 +18,7 @@ module.exports = {
         year,
         imageUrl,
         description,
+        short_info,
       })
       .then((newCar) => res.status(201).send(newCar))
       .catch((error) => res.status(400).send(error));

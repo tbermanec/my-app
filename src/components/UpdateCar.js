@@ -5,27 +5,39 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import axios from 'axios';
+const axios = require('axios');
 
-export default class CreateCar extends Component {
-  state = {
-    name: '',
-    manufacturer: '',
-    year: '',
-    description: '',
-    imageUrl: '',
+export default class UpdateCar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      manufacturer: '',
+      description: '',
+      imageUrl: '',
+    };
+  }
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  async componentDidMount() {
+    const id = this.props.match.params.id; //grab the ID from the URL
+    const { data } = await axios.get(`http://localhost:3001/api/cars/${id}`);
+    this.setState({ ...data });
+    console.log(data);
+  }
 
+  handleSubmit = (event) => {
+    const id = this.props.match.params.id; //grab the ID from the URL
     axios
-      .post('http://localhost:3001/api/cars', {
-        name: this.state.name,
-        manufacturer: this.state.manufacturer,
-        year: this.state.year,
-        description: this.state.description,
-        imageUrl: this.state.imageUrl,
+      .put(`http://localhost:3001/api/cars/${id}`, {
+        name: 'nekaj',
+        manufacturer: 'nekaj',
+        year: '1232',
+        imageUrl: 'nekaj',
+        description: 'nekaj',
       })
       .then((res, req) => {
         console.log(res.data);
@@ -35,27 +47,28 @@ export default class CreateCar extends Component {
       .catch(function (error) {
         console.log(error);
       });
-
-    //TODO
-    this.props.history.push('/');
   };
 
-  // handleCancel() {
-  //   this.setState({
-  //     title: '',
-  //     author: '',
-  //     url: '',
-  //   });
-  // }
+  //   handleClearForm(e) {
+  //     this.setState({
+  //       this.params.name: '',
+  //       manufacturer: '',
+  //       description: '',
+  //       imageUrl: '',
+  //     });
+  //   }
 
-  render() {
+  render(prps) {
+    // const { name } = this.data.car;
     return (
       <Grid container>
         <Grid item xs={12}>
           <Paper elevation={3} style={{ padding: '10px' }}>
             <Grid container spacing={3} justify="center" direction="column">
               <Grid item xs={6}>
-                <Typography variant="h5">Add new car</Typography>
+                <Typography variant="h5">
+                  Edit a car {this.state.name}
+                </Typography>
               </Grid>
             </Grid>
             <form onSubmit={this.handleSubmit}>
@@ -121,7 +134,16 @@ export default class CreateCar extends Component {
               <Grid container spacing={3} justify="center">
                 <Grid item xs={6}>
                   <Button variant="contained" color="primary" type="submit">
-                    Create
+                    Submit
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    action={this.handleClearForm}
+                  >
+                    Cancel
                   </Button>
                 </Grid>
               </Grid>

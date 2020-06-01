@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
+
 import {
   Paper,
   Card,
@@ -42,10 +44,7 @@ export default class Car extends Component {
             <CardHeader
               avatar={<Avatar src={avatarUrl} />}
               title={name}
-              subheader={
-                'Cijena po danu: ' +
-                (shortInfo ? undefined : 'korisnik nije unio cijenu')
-              }
+              subheader={'Cijena: ' + (shortInfo ? undefined : 'na upit')}
             />
             <CardMedia style={{ height: '500px' }} image={imageUrl} />
             <CardContent>
@@ -58,6 +57,14 @@ export default class Car extends Component {
             </CardActions>
           </Card>
         </Paper>
+        <Button
+          variant="outlined"
+          color="default"
+          component={Link}
+          to={'/cars'}
+        >
+          Back to car list
+        </Button>
       </Grid>
     );
   }

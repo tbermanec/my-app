@@ -12,8 +12,10 @@ const Profile = () => {
     <Fragment>
       <img src={user.picture} alt="Profile" />
 
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
+      <h2>Nickname: {user.nickname}</h2>
+      <h3>Email: {user.email}</h3>
+      <h5>JWT information for further development:</h5>
+
       <code>{JSON.stringify(user, null, 2)}</code>
     </Fragment>
   );

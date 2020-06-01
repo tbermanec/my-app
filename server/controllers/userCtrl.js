@@ -67,7 +67,7 @@ module.exports = {
     db.cars
       .findAll({
         where: {
-          owner_id: id,
+          short_info: id,
         },
       })
       .then((users) => res.status(200).send(users))

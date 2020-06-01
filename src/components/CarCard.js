@@ -6,9 +6,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Avatar, CardMedia } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const CarCard = (props) => {
-  const { avatarUrl, name, shortInfo, description, imageUrl } = props;
+  const { avatarUrl, name, shortInfo, description, imageUrl, id } = props;
   return (
     <Card>
       <CardHeader
@@ -23,8 +24,12 @@ const CarCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">RENT</Button>
-        <Button size="small">DETAILS</Button>
+        <Button component={Link} to={``} size="small">
+          RENT
+        </Button>
+        <Button component={Link} to={`/car/${id}`} size="small">
+          DETAILS
+        </Button>
       </CardActions>
     </Card>
   );

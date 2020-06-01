@@ -21,6 +21,7 @@ ReactDOM.render(
     domain={config.domain}
     client_id={config.clientId}
     redirect_uri={'http://localhost:3000/'}
+    audience={config.audience}
     onRedirectCallback={onRedirectCallback}
   >
     <App />
